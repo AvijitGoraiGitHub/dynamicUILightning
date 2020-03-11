@@ -1,0 +1,28 @@
+<!--
+  @File Name          : Q_A_Form.cmp
+  @Description        : 
+  @Author             : Avijit Gorai
+  @Group              : 
+  @Last Modified By   : Avijit Gorai
+  @Last Modified On   : 11/3/2020, 1:18:48 am
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    11/3/2020   Avijit Gorai     Initial Version
+-->
+
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="questionAnswerMap" type="List" default="[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="slds-p-around_x-large">
+        <aura:iteration items="{!v.questionAnswerMap}" var="fieldValue">
+            <c:CommonInputComponent aura:id="fieldId" questionId="{!fieldValue.questionId}"
+                questionName="{!fieldValue.question}" required="{!fieldValue.required}"
+                readonly="{!fieldValue.readonly}" questionDisplayType="{!fieldValue.questionDisplayType}"
+                answerChoices="{!fieldValue.answerChoices}" />
+        </aura:iteration>
+        <br /><br />
+        <lightning:button onclick="{!c.submit}" label="Submit" iconName="utility:save" iconPosition="left"
+            variant="brand" />
+    </div>
+</aura:component>
