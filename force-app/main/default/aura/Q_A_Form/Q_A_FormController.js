@@ -1,18 +1,21 @@
 ({
     doInit: function (component, event, helper) {
+        //data received from web service (JSON)
+        //for demo I have omitted web service call
+        //this is the JSON equivalent data of Object format
         var questions = [];
         var qaData = new Object();
         qaData.questionId = "Q0001";
         qaData.question = "How many tickets do you have?";
         qaData.required = true;
         qaData.questionDisplayType = "PICKLIST";
-        qaData.answerChoices = ["One", "Two", "Three", "Four", "Five"];
+        qaData.answerChoices = ["1", "2", "3"];
         questions.push(qaData);
 
         qaData = new Object();
         qaData.questionId = "Q00002";
         qaData.question = "What is your real name?";
-        qaData.required = true;
+        qaData.required = false;
         qaData.readonly = false;
         qaData.questionDisplayType = "TEXT";
         questions.push(qaData);
@@ -28,7 +31,7 @@
 
         qaData = new Object();
         qaData.questionId = "Q00004";
-        qaData.question = "Select your Country";
+        qaData.question = "Select countries you've visited";
         qaData.required = true;
         qaData.readonly = false;
         qaData.questionDisplayType = "CHECKBOXGROUP";
@@ -36,7 +39,7 @@
         questions.push(qaData);
         console.log(questions);
 
-        //console.log(JSON.stringify(questions));
+        console.log(JSON.stringify(questions));
         component.set("v.questionAnswerMap", questions);
     },
     submit: function (component, event, helper) {

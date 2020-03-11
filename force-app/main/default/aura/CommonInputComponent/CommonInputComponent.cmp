@@ -1,6 +1,6 @@
 <!--
   @File Name          : CommonInputComponent.cmp
-  @Description        : 
+  @Description        : Input type is determined based on the display type provided
   @Author             : Avijit Gorai
   @Group              : 
   @Last Modified By   : Avijit Gorai
@@ -10,7 +10,7 @@
   1.0    11/3/2020   Avijit Gorai     Initial Version
 -->
 <aura:component
-    implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes"
     access="global">
 
     <!-- Attributes -->
@@ -26,7 +26,7 @@
     <aura:attribute name="fieldValueChb" type="List" access="public" />
     <aura:attribute name="answerChoices" type="List" default="[]" />
 
-    <!-- aura method -->
+    <!-- aura method, getting called from parent component to check input validaty and show message accordingly -->
     <aura:method name="checkReportValidity" action="{!c.showReportValidity}" access="public"></aura:method>
 
     <!-- Handlers -->

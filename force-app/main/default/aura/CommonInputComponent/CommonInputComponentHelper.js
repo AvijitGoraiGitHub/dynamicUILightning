@@ -1,4 +1,7 @@
 ({
+    //CommonInputComponentHelper.js
+    
+    //setting metadata (options to select) 
     setFieldMetadata: function (component, event) {
 
         var fieldMetadata = new Object();
@@ -33,7 +36,9 @@
         }
         component.set('v.fieldMetadata', fieldMetadata);
     },
-
+	
+    //onchange, assigning changed value to attribute 'fieldValue'. 
+    //This is helpful to get/access value of the input component from parent component
     handleFieldValueChanged: function (component, event) {
         var newFieldValue = event.getParam('value') !== undefined ? event.getParam('value') : event.getSource().get('v.value');
         component.set('v.fieldValue', newFieldValue);
