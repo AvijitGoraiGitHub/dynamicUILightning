@@ -1,8 +1,9 @@
 ({
+    //Q_A_FormController.js
+
     doInit: function (component, event, helper) {
-        //data received from web service (JSON)
-        //for demo I have omitted web service call
-        //this is the JSON equivalent data of Object format
+        //data received from web service (JSON) - to keep this demo simple, I have omitted Webservice call
+        //this is the JSON equivalent data in Object format
         var questions = [];
         var qaData = new Object();
         qaData.questionId = "Q0001";
@@ -42,10 +43,14 @@
         console.log(JSON.stringify(questions));
         component.set("v.questionAnswerMap", questions);
     },
+
     submit: function (component, event, helper) {
         var requiredMissing = false;
-        const cmps = component.find("fieldId");
+        //finding list of rendered component based upon aura id = fieldId. This will give us a array of component
+        const cmps = component.find("fieldId"); 
         if (!cmps) return;
+        //looping through to check if current component's value is required but input value has not been provided
+        //then calling checkReportValidity aura method to check its input validaty and show message accordingly
         cmps.forEach(function (cmp) {
             let selectedVal = cmp.get("v.fieldValue");
             console.log(cmp.get("v.questionId") + " -- " + selectedVal);
@@ -55,15 +60,19 @@
                 console.log("Required field is missing for " + cmp.get("v.questionId"));
             }
         });
+
         if (requiredMissing) {
             console.log("requireFieldMissing");
         } else {
+            //all fine then collecting input value from each of components and added to a Map for further use as per business need
             let answersMap = new Map();
             cmps.forEach(function (cmp) {
-                let selected = cmp.get("v.fieldValue");
-                answersMap.set(cmp.get("v.questionId"), selected === undefined ? "" : selected);
+                let fieldValue = cmp.get("v.fieldValue");
+                answersMap.set(cmp.get("v.questionId"), fieldValue === undefined ? "" : fieldValue);
             });
+            
             console.log("answersMap --> ", answersMap);
+
             let successMapStr = JSON.stringify(Object.fromEntries(answersMap.entries()));
             let successMsg = "Success :: " + successMapStr;
             helper.showTosteMessage(
